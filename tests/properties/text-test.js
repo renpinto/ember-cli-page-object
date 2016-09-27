@@ -200,4 +200,15 @@ moduleForProperty('text', function(test, adapter) {
 
     assert.equal(page.foo, 'lorem ipsum');
   });
+
+  test('looks for elements within test container specified at node level', function(assert) {
+    let page = create({
+      testContainer: '#alternate-ember-testing',
+      foo: text('h1')
+    });
+
+    adapter.createTemplate(this, page, '<h1>lorem ipsum</h1>', { useAlternateContainer: true });
+
+    assert.equal(page.foo, 'lorem ipsum');
+  });
 });

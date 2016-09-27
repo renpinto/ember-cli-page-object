@@ -138,4 +138,15 @@ moduleForProperty('property', function(test, adapter) {
 
     assert.ok(page.foo);
   });
+
+  test('looks for elements within test container specified at node level', function(assert) {
+    let page = create({
+      testContainer: '#alternate-ember-testing',
+      foo: property('checked', ':input')
+    });
+
+    adapter.createTemplate(this, page, '<input checked>', { useAlternateContainer: true });
+
+    assert.ok(page.foo);
+  });
 });

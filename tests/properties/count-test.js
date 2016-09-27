@@ -92,4 +92,15 @@ moduleForProperty('count', function(test, adapter) {
 
     assert.equal(page.foo, 2);
   });
+
+  test('looks for elements within test container specified at node level', function(assert) {
+    let page = create({
+      testContainer: '#alternate-ember-testing',
+      foo: count('span')
+    });
+
+    adapter.createTemplate(this, page, '<span></span><span></span>', { useAlternateContainer: true });
+
+    assert.equal(page.foo, 2);
+  });
 });

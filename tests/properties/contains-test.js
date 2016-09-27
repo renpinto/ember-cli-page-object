@@ -143,4 +143,15 @@ moduleForProperty('contains', function(test, adapter) {
 
     assert.ok(page.foo('ipsum'));
   });
+
+  test('looks for elements within test container specified at node level', function(assert) {
+    let page = create({
+      testContainer: '#alternate-ember-testing',
+      foo: contains('span')
+    });
+
+    adapter.createTemplate(this, page, 'Lorem <span>ipsum</span>', { useAlternateContainer: true });
+
+    assert.ok(page.foo('ipsum'));
+  });
 });
